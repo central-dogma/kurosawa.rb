@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{kurosawa.rb}
   spec.description   = %q{Tribute to Kurosawa Ruby}
-  spec.homepage      = "https://github.com/astrobunny/kurosawa"
+  spec.homepage      = "https://github.com/astrobunny/kurosawa.rb"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
