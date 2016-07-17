@@ -1,8 +1,10 @@
-# Kurosawa
+# kurosawa.rb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kurosawa`. To experiment with that code, run `bin/console` for an interactive prompt.
+Best girl Kurosawa Ruby is a real gem
 
-TODO: Delete this and the text above, and describe your gem
+![Kurosawa Ruby](https://github.com/astrobunny/kurosawa.rb/raw/master/docs/images/kurosawa-ruby.jpg)
+
+This gem will provide everything useful pertaining to Ruby
 
 ## Installation
 
