@@ -75,11 +75,13 @@ module Kurosawa
 				res = {}
 
 				inner_entries = fs.ls("#{path}")
-					.select{ |x| /\/\$/.match(x) == nil }
+					.select{ |x| /^\/\$/.match(x) == nil }
 					.map{ |x| x.sub(/\/[^\/]+$/, "") }
-					.map{ |x| /(?<first>^\/[^\/]+)/.match(x.sub(/^#{path}/, ""))[:first] }
+					.map{ |x| match = /(?<first>^\/[^\/]+)/.match(x.sub(/^#{path}/, "")); match[:first] if match }
+					.select{ |x| x != nil}
 					.uniq
 
+				puts "read: object: inner: #{fs.ls("#{path}").inspect}"
 				puts "read: object: inner: #{inner_entries.inspect}"
 
 				inner_entries.each do |x|
@@ -144,6 +146,8 @@ module Kurosawa
 
 		def delete(fs, path)
 			inner_entries = fs.ls("#{path}")
+
+			puts "delete: #{inner_entries.inspect}"
 
 			inner_entries.each do |x|
 				fs.del(x)
