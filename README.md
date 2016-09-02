@@ -24,11 +24,21 @@ Or install it yourself as:
 
 ## Usage
 
+### On your local environment
+
 Run the server
 
 ```
 KUROSAWA_FILESYSTEM=file://fs/db bundle exec kurosawa
 ```
+
+### With a docker container
+
+```
+docker run -ti -p4567:4567 astrobunny/kurosawa.rb
+```
+
+### Try it out!
 
 Send it REST commands! (Here I am using resty)
 
