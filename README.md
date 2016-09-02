@@ -1,10 +1,8 @@
 # kurosawa.rb
 
-Best girl Kurosawa Ruby is a real gem
-
 ![Kurosawa Ruby](https://github.com/astrobunny/kurosawa.rb/raw/master/docs/images/kurosawa-ruby.jpg)
 
-This gem will provide everything useful pertaining to Ruby
+A JSON-based database for eventually-consistent filesystem backends
 
 ## Installation
 
@@ -34,5 +32,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/astrobunny/kurosawa.rb
+Bug reports and pull requests are welcome on GitHub at https://github.com/astrobunny/kurosawa.
 
