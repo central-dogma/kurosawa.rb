@@ -2,7 +2,9 @@
 
 ![Kurosawa Ruby](https://github.com/astrobunny/kurosawa.rb/raw/master/docs/images/kurosawa-ruby.jpg)
 
-A JSON-based database for eventually-consistent filesystem backends
+A RESTful JSON-based database for eventually-consistent filesystem backends. Uses the REST path to determine object hierarchy.
+
+# THIS DATABASE IS STILL IN ALPHA
 
 ## Installation
 
@@ -22,7 +24,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run the server
+
+```
+KUROSAWA_FILESYSTEM=file://fs/db bundle exec kurosawa
+```
+
+Send it REST commands! (Here I am using resty)
+
+```
+$ GET /
+null
+$ PUT / '{"a": 7, "b": {"e":[100,200,300]} }'
+{"a":"7","b":{"e":["300","200","100"]}}
+$ GET /
+{"a":"7","b":{"e":["300","200","100"]}}
+$ GET /a/b
+null
+$ GET /a
+"7"
+$ GET /b
+{"e":["300","200","300","140","100","200"]}
+$ GET /b/e
+["300","200","300","140","100","200"]
+$ PATCH / '{"c": "Idols"}'
+{"a":"7","b":{"e":["300","200","300","140","100","200"]},"c":"Idols"}
+$ GET /c
+"Idols"
+```
+
 
 ## Development
 
