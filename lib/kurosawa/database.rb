@@ -65,7 +65,7 @@ module Kurosawa
 		end
 
 
-		def read(fs, path, ignore_objects: false)
+		def read(fs, path, params)
 
 			puts "read: path=#{path.inspect}"
 			prop = get_property(fs, path)
@@ -85,7 +85,7 @@ module Kurosawa
 				puts "read: object: inner: #{inner_entries.inspect}"
 
 				inner_entries.each do |x|
-					res[x[1..-1]] = read(fs, path + x)
+					res[x[1..-1]] = read(fs, path + x, params)
 				end
 
 				res
@@ -93,11 +93,14 @@ module Kurosawa
 			elsif prop[:type] == "array"
 				inner_entries = fs.ls("#{path}")
 					.select{ |x| /\/\$/.match(x) == nil }
+					.map{ |x| match = /(?<first>^\/[^\/]+)/.match(x.sub(/^#{path}/, "")); match[:first] if match }
+					.select{ |x| x != nil}
+					.uniq
 
 				puts "read: array: #{inner_entries.inspect}"
 
-				inner_entries.select{|x| fs.exists(x)}.map do |x|
-					JSON.parse(fs.get(x), symbolize_names: true)[:value] 
+				inner_entries.map do |x|
+					read(fs, path + x, params)
 				end
 
 			else
@@ -156,7 +159,7 @@ module Kurosawa
 
 		get "*" do
 			path = sanitize_path(request.path)
-			x = read(settings.filesystem, path)
+			x = read(settings.filesystem, path, params)
 			status 404 if x == nil
 			x.to_json
 		end
@@ -170,19 +173,19 @@ module Kurosawa
 			path = sanitize_path(request.path)
 			delete(settings.filesystem, path)
 			write(settings.filesystem, path, sanitize_body(request.body.read))
-			read(settings.filesystem, path).to_json
+			read(settings.filesystem, path, params).to_json
 		end
 
 		patch "*" do
 			path = sanitize_path(request.path)
 			write(settings.filesystem, path, sanitize_body(request.body.read))
-			read(settings.filesystem, path).to_json
+			read(settings.filesystem, path, params).to_json
 		end
 
 		delete "*" do
 			path = sanitize_path(request.path)
 			delete(settings.filesystem, path)
-			read(settings.filesystem, path).to_json
+			read(settings.filesystem, path, params).to_json
 		end
 
 		head "*" do
@@ -190,6 +193,10 @@ module Kurosawa
 
 		end
 
+		options "*" do
+			path = sanitize_path(request.path)
+
+		end
 
 
 	end
