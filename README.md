@@ -72,6 +72,25 @@ $ PUT /c '{"5": "a"}'
 
 ```
 
+### Connecting to a filesystem
+
+kurosawa.rb supports these filesystems:
+- local filesystem
+- s3
+
+Using the local filesystem: 
+
+```
+KUROSAWA_FILESYSTEM=file:///var/some/local/path
+```
+
+Using S3:
+
+```
+KUROSAWA_FILESYSTEM=s3://access_key:access_secret:us-west-1@bucket-name
+```
+
+Ensure that you URL encode your access_key and access_secret so it will not fail to parse the URI. Replace us-west-1 with whichever region your bucket is located in.
 
 ## Development
 
