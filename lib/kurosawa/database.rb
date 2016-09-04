@@ -122,6 +122,8 @@ module Kurosawa
 
 		def write(fs, path, body)
 
+			puts "write: path=#{path.inspect}"
+
 			if body.is_a? Hash
 				set_property(fs, path, type: "object")
 				body.each do |k,v|
