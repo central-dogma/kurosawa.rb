@@ -192,7 +192,9 @@ module Kurosawa
 
 		head "*" do
 			path = sanitize_path(request.path)
-
+			property = get_property(settings.filesystem, path)
+			status 404 if property == nil
+			""
 		end
 
 		options "*" do
